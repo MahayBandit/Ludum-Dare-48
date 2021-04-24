@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Kaczka_x64.png-9b07d615c2370cefbd660c710b43ef0b.stex"
+path="res://.import/Kaczka_265X.png-eafda34aa87cd18b658ac4ab5868c896.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Kaczka_x64.png"
-dest_files=[ "res://.import/Kaczka_x64.png-9b07d615c2370cefbd660c710b43ef0b.stex" ]
+source_file="res://assets/Kaczka_265X.png"
+dest_files=[ "res://.import/Kaczka_265X.png-eafda34aa87cd18b658ac4ab5868c896.stex" ]
 
 [params]
 

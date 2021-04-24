@@ -26,3 +26,5 @@ func _physics_process(delta: float) -> void:
 	movement.normalized()
 	
 	move_and_slide(movement)
+
+
