@@ -1,30 +1,29 @@
-extends StaticBody2D
+extends Area2D
 
 export var default_velocity: float = 500
 export var speed_duration = 5
-var height: float = 1800
-var start_position: float = 0
 var velocity = default_velocity
 var timer
 
 func _ready():
 	#Connect timer
 	timer = Timer.new()
-	timer.set_wait_time(5)
+	timer.set_wait_time(speed_duration)
 	timer.set_one_shot(true)
 	add_child(timer)
 	timer.connect("timeout", self, "_on_timer_timeout")
-
-	start_position = position.y
+	
+	#Connect SpeedUp
+	var button = get_node("/root/Main/Button")
+	button.connect("pressed", self, "_on_SpeedUp")
+	
+	#Check if speed up is on
+#	var main = get_node("/root/Main")
+#	main.connect("speed_up_on", self, "_on_speed_up_on")
 	
 func _process(delta):
 	position.y -= velocity * delta
-	_attempt_reposition()
 	
-func _attempt_reposition():
-	if position.y < -height/2+100:
-		position.y = start_position
-
 #Change speed on signal
 func _on_SpeedUp():
 	velocity = velocity * 2
@@ -34,4 +33,5 @@ func _on_SpeedUp():
 func _on_timer_timeout():
 	velocity = default_velocity
 
-
+func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()

@@ -10,6 +10,7 @@ extents = Vector2( 205, 900 )
 extents = Vector2( 200, 900 )
 
 [node name="StaticBody2D" type="StaticBody2D"]
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 205, 900 )
@@ -23,4 +24,3 @@ shape = SubResource( 2 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 1 )
 centered = false
-script = ExtResource( 2 )
