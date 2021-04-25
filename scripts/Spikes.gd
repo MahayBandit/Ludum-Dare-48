@@ -2,9 +2,8 @@ extends StaticBody2D
 
 export var default_velocity: float = 5
 export var speed_duration = 5
-var height: float = 1800
-var start_position: float = 0
 var velocity = default_velocity
+var speedup: bool
 var timer
 
 func _ready():
@@ -14,17 +13,14 @@ func _ready():
 	timer.set_one_shot(true)
 	add_child(timer)
 	timer.connect("timeout", self, "_on_timer_timeout")
-
-	start_position = position.y
+	
+	#Connect SpeedUp
+	var button = get_node("/root/Main/Button")
+	button.connect("pressed", self, "_on_SpeedUp")
 	
 func _process(_delta):
 	position.y -= velocity
-	_attempt_reposition()
 	
-func _attempt_reposition():
-	if position.y < -height/2+100:
-		position.y = start_position
-
 #Change speed on signal
 func _on_SpeedUp():
 	velocity = velocity * 2
