@@ -18,3 +18,6 @@ shape = SubResource( 1 )
 [node name="Kaczka_x64" type="Sprite" parent="."]
 position = Vector2( 540.321, 470.412 )
 texture = ExtResource( 1 )
+
+[node name="ImmortalityTimer" type="Timer" parent="."]
+wait_time = 3.0

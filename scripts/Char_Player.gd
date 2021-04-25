@@ -5,8 +5,14 @@ export var falling_modifier = 1.0
 
 export var health = 0
 
+
+var immortal = false
+
+
 func _ready():
 	print("fuck this shit")
+
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -14,9 +20,11 @@ func _physics_process(delta: float) -> void:
 	
 	movement = movement*speed
 	
-	var horizontl:= Vector2(Input.get_action_strength("Player_move_right") - Input.get_action_strength("Player_move_left"), 1.0)
+	var horizontl:= Vector2(Input.get_action_strength("Player_move_right") 
+	- Input.get_action_strength("Player_move_left"), 1.0)
 	
-	var verticl := Vector2(1.0 , Input.get_action_strength("Player_move_down") - Input.get_action_strength("Player_move_up"))
+	var verticl := Vector2(1.0 , Input.get_action_strength("Player_move_down") 
+	- Input.get_action_strength("Player_move_up"))
 	
 	
 	
@@ -32,12 +40,32 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide(movement)
 
+	
 
 func take_dmg():
 	print("fuck this shit")
 	
-	health = health - 1
-	if health <= 0:
-		visible = not visible
+
+	
+	if not immortal:
+		health = health - 1
+		if health <= 0:
+			visible = not visible
+		immortality()
+
+
+func immortality():
+	immortal = true
+	print ("immortality")
+	print (" ")
+	
+	var timer = get_node("ImmortalityTimer")
+	timer.connect("timeout", self, "on_timer_timeout")
+	timer.set_one_shot(true)
+	timer.start()
 	
 	
+func on_timer_timeout():
+	print (health)
+	print (" ")
+	immortal = false
