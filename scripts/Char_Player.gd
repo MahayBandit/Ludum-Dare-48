@@ -1,17 +1,20 @@
 extends KinematicBody2D
 
+
+
 export var speed:= 0
 export var falling_modifier = 1.0
 
-export var health = 0
+export var max_health = 0
+var health = 0
 
 
 var immortal = false
 
 
 func _ready():
-	print("fuck this shit")
-
+	print("FALL!")
+	health = max_health
 
 
 func _physics_process(delta: float) -> void:
@@ -43,23 +46,24 @@ func _physics_process(delta: float) -> void:
 	
 
 func take_dmg():
-	print("fuck this shit")
+	print("collision occured UwU")
 	
-
 	
 	if not immortal:
-		health = health - 1
-		if health <= 0:
-			visible = not visible
+		health_change(-1)
 		immortality()
 
 
-func immortality():
+func immortality(duration=3):
 	immortal = true
 	print ("immortality")
 	print (" ")
 	
 	var timer = get_node("ImmortalityTimer")
+	
+	timer.set_wait_time(duration)
+	
+	
 	timer.connect("timeout", self, "on_timer_timeout")
 	timer.set_one_shot(true)
 	timer.start()
@@ -69,3 +73,15 @@ func on_timer_timeout():
 	print (health)
 	print (" ")
 	immortal = false
+	
+	
+	
+func health_change(ammount):
+	
+		health = health + ammount
+		
+		if health > max_health:
+			health = max_health
+		
+		if health <= 0:
+			visible = false
