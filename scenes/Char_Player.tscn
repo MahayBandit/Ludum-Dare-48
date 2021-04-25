@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/Kaczka_265X.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Char_Player.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 100.0
+
+[node name="PlayerBody" type="KinematicBody2D"]
+script = ExtResource( 2 )
+speed = 550
+health = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 542.394, 470.412 )
+shape = SubResource( 1 )
+
+[node name="Kaczka_x64" type="Sprite" parent="."]
+position = Vector2( 540.321, 470.412 )
+texture = ExtResource( 1 )
