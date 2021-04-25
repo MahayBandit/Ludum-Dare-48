@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-export var default_velocity: float = 5
+export var default_velocity: float = 500
 export var speed_duration = 5
 var height: float = 1800
 var start_position: float = 0
@@ -17,8 +17,8 @@ func _ready():
 
 	start_position = position.y
 	
-func _process(_delta):
-	position.y -= velocity
+func _process(delta):
+	position.y -= velocity * delta
 	_attempt_reposition()
 	
 func _attempt_reposition():
@@ -33,3 +33,5 @@ func _on_SpeedUp():
 #Restore default speed
 func _on_timer_timeout():
 	velocity = default_velocity
+
+
