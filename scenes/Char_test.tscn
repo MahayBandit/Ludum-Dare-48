@@ -7,13 +7,13 @@
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 457.518, 273.36 )
+position = Vector2( 304.691, 498.106 )
 
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1074.93, 313.395 )
+position = Vector2( 1073.67, 515.743 )
 
 [node name="HeartPickup" parent="." instance=ExtResource( 3 )]
-position = Vector2( 790.729, 736.75 )
+position = Vector2( 1292.32, 338.007 )
 
 [node name="HeartPickup2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 613.54, 710.261 )
+position = Vector2( 1410.49, 331.773 )

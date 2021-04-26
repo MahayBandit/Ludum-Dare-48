@@ -7,6 +7,17 @@ export var max_health = 5
 var health
 var ammo = 3
 var points = 0
+
+signal on_health_changed(ammount)
+
+signal game_over()
+signal make_immortal()
+
+signal ammo_change(ammount)
+
+export var speed:= 0
+#export var falling_modifier = 1.0
+
 var immortal = false
 var rocket_flag = true
 var imortality_timer
@@ -29,6 +40,7 @@ func _ready():
 	print("3... 2... 1...")
 	print("FALL!")
 
+
 func _process(_delta):
 	var movement = Vector2.ZERO
 	
@@ -46,28 +58,49 @@ func _process(_delta):
 func take_dmg(amount):
 	if not immortal:
 		health_change(-amount)
+
+	emit_signal("on_health_changed", health)
+	
+	
+
 		immortality()
 
 func immortality(duration=3):
 	immortal = true
 	print ("immortality")
+	emit_signal("make_immortal")
 	
+
 	imortality_timer.set_wait_time(duration)
 	imortality_timer.start()
 	
 func on_imortality_timer_timeout():
-	immortal = false
+
+
 	
+
+
+	immortal = false
+	emit_signal("make_immortal")
+	
+
 func health_change(amount):
 	health += amount
 	
 	if health > max_health:
 		health = max_health
+
 	
 	print("Health changed: ", health)
 		
-	#if health <= 0:
+
+	emit_signal("on_health_changed", health)
+		
+		
+	if health <= 0:
 		#visible = false
+		emit_signal("game_over")
+			
 
 #Ammo managment
 func ammo_change(amount):
@@ -92,3 +125,4 @@ func on_rocket_timer_timeout():
 func points_change(amount):
 	points += amount
 	print("Oto twoje punkty byku: ", points)
+
