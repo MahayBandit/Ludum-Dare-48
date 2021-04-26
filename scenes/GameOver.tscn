@@ -1,0 +1,101 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/sprites/Background.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Buttons/Retry_B_gray.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/MenuGraphics/GO.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/Buttons/Exit_B_gray.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/Buttons/Exit_B.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/Buttons/Retry_B.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/Minecraft.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scripts/GameOver.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+font_data = ExtResource( 7 )
+
+[node name="Background" type="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainBox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GO" type="TextureRect" parent="MainBox"]
+margin_right = 1600.0
+margin_bottom = 396.0
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Scoreboard" type="HBoxContainer" parent="MainBox"]
+margin_top = 400.0
+margin_right = 1600.0
+margin_bottom = 500.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="MainBox/Scoreboard"]
+margin_right = 798.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 1 )
+text = "Score: "
+align = 2
+
+[node name="Score" type="Label" parent="MainBox/Scoreboard"]
+margin_left = 802.0
+margin_right = 1600.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+text = "4300000"
+
+[node name="Buttons" type="VBoxContainer" parent="MainBox"]
+margin_top = 504.0
+margin_right = 1600.0
+margin_bottom = 900.0
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Retry" type="TextureButton" parent="MainBox/Buttons"]
+margin_right = 1600.0
+margin_bottom = 196.0
+size_flags_vertical = 3
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="Exit" type="TextureButton" parent="MainBox/Buttons"]
+margin_top = 200.0
+margin_right = 1600.0
+margin_bottom = 396.0
+size_flags_vertical = 3
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[connection signal="pressed" from="MainBox/Buttons/Retry" to="." method="_on_Retry_pressed"]
+[connection signal="pressed" from="MainBox/Buttons/Exit" to="." method="_on_Exit_pressed"]
