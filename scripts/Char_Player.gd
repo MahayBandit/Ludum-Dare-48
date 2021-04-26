@@ -13,8 +13,11 @@ var immortal = false
 
 
 func _ready():
-	print("FALL!")
+	
 	health = max_health
+	print("poczatkowe hp: ", health)
+	print("3... 2... 1...")
+	print("FALL!")
 
 
 func _physics_process(delta: float) -> void:
@@ -37,7 +40,8 @@ func _physics_process(delta: float) -> void:
 		falling_modifier = 0.5
 	
 	movement = movement * horizontl
-	movement = movement * verticl * falling_modifier
+	#movement = movement * verticl * falling_modifier 
+	movement. y = 0
 	
 	movement.normalized()
 	
@@ -45,19 +49,18 @@ func _physics_process(delta: float) -> void:
 
 	
 
-func take_dmg():
+func take_dmg(ammount):
 	print("collision occured UwU")
 	
 	
 	if not immortal:
-		health_change(-1)
+		health_change(ammount)
 		immortality()
 
 
 func immortality(duration=3):
 	immortal = true
 	print ("immortality")
-	print (" ")
 	
 	var timer = get_node("ImmortalityTimer")
 	
@@ -70,8 +73,6 @@ func immortality(duration=3):
 	
 	
 func on_timer_timeout():
-	print (health)
-	print (" ")
 	immortal = false
 	
 	
@@ -83,5 +84,7 @@ func health_change(ammount):
 		if health > max_health:
 			health = max_health
 		
-		if health <= 0:
-			visible = false
+		print("Health changed: ", health)
+		
+		#if health <= 0:
+			#visible = false

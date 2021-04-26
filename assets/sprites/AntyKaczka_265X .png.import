@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Heart_col_64x.png-cd028567b9b3f512caa0690b1dbb8c8c.stex"
+path="res://.import/AntyKaczka_265X .png-95e988c96834ee103fc6df82b5f86ab1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Heart_col_64x.png"
-dest_files=[ "res://.import/Heart_col_64x.png-cd028567b9b3f512caa0690b1dbb8c8c.stex" ]
+source_file="res://assets/sprites/AntyKaczka_265X .png"
+dest_files=[ "res://.import/AntyKaczka_265X .png-95e988c96834ee103fc6df82b5f86ab1.stex" ]
 
 [params]
 

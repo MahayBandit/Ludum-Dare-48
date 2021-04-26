@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Char_Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Spikes.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Char_Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Pickups/HeartPickup.tscn" type="PackedScene" id=4]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="EnemyBody" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1282.26, 328.114 )
+
+[node name="PlayerBody" parent="." instance=ExtResource( 1 )]
+position = Vector2( -149.62, -343.752 )
+
+[node name="Spike" parent="." instance=ExtResource( 2 )]
+position = Vector2( 387.204, 879.437 )
+
+[node name="HeartPickup" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1297.01, 697.556 )
+
+[node name="HeartPickup2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 684.639, 799.794 )
