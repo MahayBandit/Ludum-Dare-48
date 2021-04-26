@@ -13,15 +13,15 @@ func _on_Main_spawn_pickup(spawn_location):
 	if roll == 1:
 		pickup = PickupA.instance()
 		add_child(pickup)
-		print("Spawn A")
+		print("Spawned: Healt Pickup")
 	elif roll == 2:
 		pickup = PickupB.instance()
 		add_child(pickup)
-		print("Spawn B")
+		print("Spawned: Ammo Pickup")
 	else:
 		pickup = PickupC.instance()
 		add_child(pickup)
-		print("Spawn C")
+		print("Spawned: Gem Pickup")
 		
 	pickup.position = spawn_location.position
 	

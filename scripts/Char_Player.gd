@@ -1,90 +1,91 @@
 extends KinematicBody2D
 
+export (PackedScene) var rocket_scene
 
-
-export var speed:= 0
-export var falling_modifier = 1.0
-
-export var max_health = 0
-var health = 0
-
-
+export var speed = 500
+export var max_health = 5
+var health
+var ammo = 0
+var points = 0
 var immortal = false
+var rocket_flag = true
+var imortality_timer
+var rocket_timer
 
+var is_rocket = false
 
 func _ready():
+	imortality_timer = get_node("ImmortalityTimer")
+	imortality_timer.connect("timeout", self, "on_imortality_timer_timeout")
+#	imortality_timer.set_one_shot(true)
+	
+	rocket_timer = get_node("RocketTimer")
+	rocket_timer.connect("timeout", self, "on_rocket_timer_timeout")
+	rocket_timer.set_one_shot(true)
 	
 	health = max_health
 	print("poczatkowe hp: ", health)
 	print("3... 2... 1...")
 	print("FALL!")
 
+func _process(_delta):
+	var movement = Vector2.ZERO
+	
+	if Input.is_action_pressed("ui_left"):
+		movement.x = -1
+	if Input.is_action_pressed("ui_right"):
+		movement.x = 1
+	if Input.is_action_just_pressed("ui_accept"):
+		if rocket_flag:
+			shoot_rocket()
+	
+	move_and_slide(movement * speed)
 
-func _physics_process(delta: float) -> void:
-	
-	var movement: = Vector2(1,1)
-	
-	movement = movement*speed
-	
-	var horizontl:= Vector2(Input.get_action_strength("Player_move_right") 
-	- Input.get_action_strength("Player_move_left"), 1.0)
-	
-	var verticl := Vector2(1.0 , Input.get_action_strength("Player_move_down") 
-	- Input.get_action_strength("Player_move_up"))
-	
-	
-	
-	if Input.get_action_strength("Player_move_faster"):
-		falling_modifier = 2.0
-	else:
-		falling_modifier = 0.5
-	
-	movement = movement * horizontl
-	#movement = movement * verticl * falling_modifier 
-	movement. y = 0
-	
-	movement.normalized()
-	
-	move_and_slide(movement)
-
-	
-
-func take_dmg(ammount):
-	print("collision occured UwU")
-	
-	
+#Health managment
+func take_dmg(amount):
 	if not immortal:
-		health_change(ammount)
+		health_change(-amount)
 		immortality()
-
 
 func immortality(duration=3):
 	immortal = true
 	print ("immortality")
 	
-	var timer = get_node("ImmortalityTimer")
+	imortality_timer.set_wait_time(duration)
+	imortality_timer.start()
 	
-	timer.set_wait_time(duration)
-	
-	
-	timer.connect("timeout", self, "on_timer_timeout")
-	timer.set_one_shot(true)
-	timer.start()
-	
-	
-func on_timer_timeout():
+func on_imortality_timer_timeout():
 	immortal = false
 	
+func health_change(amount):
+	health += amount
 	
+	if health > max_health:
+		health = max_health
 	
-func health_change(ammount):
-	
-		health = health + ammount
+	print("Health changed: ", health)
 		
-		if health > max_health:
-			health = max_health
+	#if health <= 0:
+		#visible = false
+
+#Ammo managment
+func ammo_change(amount):
+	ammo += amount
+	print("Ammo: ", ammo)
+
+func shoot_rocket():
+	rocket_timer.start()
+	rocket_timer.set_wait_time(1)
+	var rocket = rocket_scene.instance()
+	get_node("/root/Main").add_child(rocket)
+	rocket.position = position + Vector2(0, 150)
 		
-		print("Health changed: ", health)
-		
-		#if health <= 0:
-			#visible = false
+	rocket_flag = false
+
+func on_rocket_timer_timeout():
+	rocket_flag = true
+
+#Points managmet
+func points_change(amount):
+	points += amount
+	print("Oto twoje punkty byku: ", points)
