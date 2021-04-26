@@ -22,3 +22,5 @@ func game_over():
 	timer.stop()
 	score_label.text = "GAME OVER! " + str(score_count) 
 
+func _on_PlayerBody_game_over():
+	game_over()

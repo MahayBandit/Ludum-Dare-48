@@ -3,20 +3,15 @@ extends KinematicBody2D
 export (PackedScene) var rocket_scene
 
 export var speed = 500
-export var max_health = 5
-var health
+export var max_health = 3
+var health = 0
 var ammo = 3
 var points = 0
 
-signal on_health_changed(ammount)
-
+signal on_health_changed(amount)
 signal game_over()
 signal make_immortal()
-
-signal ammo_change(ammount)
-
-export var speed:= 0
-#export var falling_modifier = 1.0
+signal ammo_change(amount)
 
 var immortal = false
 var rocket_flag = true
@@ -29,17 +24,15 @@ var is_wall = false
 func _ready():
 	imortality_timer = get_node("ImmortalityTimer")
 	imortality_timer.connect("timeout", self, "on_imortality_timer_timeout")
-#	imortality_timer.set_one_shot(true)
 	
 	rocket_timer = get_node("RocketTimer")
 	rocket_timer.connect("timeout", self, "on_rocket_timer_timeout")
 	rocket_timer.set_one_shot(true)
 	
 	health = max_health
-	print("poczatkowe hp: ", health)
-	print("3... 2... 1...")
-	print("FALL!")
-
+	
+	emit_signal("on_health_changed", health)
+	emit_signal("ammo_change", ammo)
 
 func _process(_delta):
 	var movement = Vector2.ZERO
@@ -60,52 +53,38 @@ func take_dmg(amount):
 		health_change(-amount)
 
 	emit_signal("on_health_changed", health)
-	
-	
-
-		immortality()
+	immortality()
 
 func immortality(duration=3):
-	immortal = true
-	print ("immortality")
-	emit_signal("make_immortal")
+	if not immortal:
+		immortal = true
+		print ("immortality")
+		emit_signal("make_immortal")
 	
-
-	imortality_timer.set_wait_time(duration)
-	imortality_timer.start()
+		imortality_timer.set_wait_time(duration)
+		imortality_timer.start()
 	
 func on_imortality_timer_timeout():
-
-
-	
-
-
 	immortal = false
 	emit_signal("make_immortal")
 	
-
 func health_change(amount):
 	health += amount
 	
 	if health > max_health:
 		health = max_health
-
 	
 	print("Health changed: ", health)
 		
-
 	emit_signal("on_health_changed", health)
 		
-		
 	if health <= 0:
-		#visible = false
 		emit_signal("game_over")
-			
 
 #Ammo managment
 func ammo_change(amount):
 	ammo += amount
-	print("Ammo: ", ammo)
+	emit_signal("ammo_change", ammo)
 
 func shoot_rocket():
 	if ammo != 0:
@@ -117,6 +96,7 @@ func shoot_rocket():
 	
 		ammo -= 1
 		rocket_flag = false
+		emit_signal("ammo_change", ammo)
 
 func on_rocket_timer_timeout():
 	rocket_flag = true

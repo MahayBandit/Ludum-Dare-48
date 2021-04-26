@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/sprites/Background.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Scroll loop.gd" type="Script" id=2]
@@ -6,20 +6,10 @@
 [ext_resource path="res://scenes/Spikes.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=5]
 [ext_resource path="res://scripts/PickupSpawner.gd" type="Script" id=6]
-[ext_resource path="res://scenes/Pickups/HeartPickup.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Pickups/RocketPickup.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Pickups/GemPickup.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/Char_Player.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scripts/ObstacleSpawner.gd" type="Script" id=11]
-[ext_resource path="res://scenes/Obstacles/PlanksObstacle.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/Obstacles/BricksObstacle.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/Pickups/InvincibilityPickup.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scripts/EnemySpawner.gd" type="Script" id=15]
-[ext_resource path="res://scenes/Enemies/EnemyBat.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/Enemies/EnemySpider.tscn" type="PackedScene" id=17]
-[ext_resource path="res://scenes/UI_Player_Ammo.tscn" type="PackedScene" id=18]
-[ext_resource path="res://scenes/UI_Player_HP.tscn" type="PackedScene" id=19]
-[ext_resource path="res://scenes/UI_Score_Counter.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/UI_Player_HP.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/UI_Score_Counter.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/UI_Player_Ammo.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -36,8 +26,6 @@ script = ExtResource( 5 )
 spike_scene = ExtResource( 4 )
 
 [node name="Background" type="StaticBody2D" parent="."]
-collision_layer = 2
-collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="Background"]
@@ -68,52 +56,45 @@ autostart = true
 wait_time = 0.75
 autostart = true
 
+[node name="Button" type="Button" parent="."]
+margin_left = 1284.48
+margin_top = 160.71
+margin_right = 1581.48
+margin_bottom = 265.71
+text = "Speed up"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PickupSpawner" type="Node" parent="."]
 script = ExtResource( 6 )
-PickupA = ExtResource( 7 )
-PickupB = ExtResource( 8 )
-PickupC = ExtResource( 9 )
-PickupD = ExtResource( 14 )
 
-[node name="ObstacleSpawner" type="Node" parent="."]
-script = ExtResource( 11 )
-ObstacleA = ExtResource( 13 )
-ObstacleB = ExtResource( 12 )
+[node name="UI_Player_HP" parent="." instance=ExtResource( 11 )]
 
-[node name="EnemySpawner" type="Node" parent="."]
-script = ExtResource( 15 )
-EnemyA = ExtResource( 16 )
-EnemyB = ExtResource( 17 )
+[node name="UI_Player_Score" parent="." instance=ExtResource( 12 )]
+margin_left = 18.0
+margin_top = 275.0
+margin_right = 18.0
+margin_bottom = 275.0
 
-[node name="UI_Player_HP" parent="." instance=ExtResource( 19 )]
-margin_left = 7.94196
-margin_top = 29.0486
-margin_right = 7.94196
-margin_bottom = 29.0486
-
-[node name="UI_Player_Score" parent="." instance=ExtResource( 20 )]
-margin_left = 51.1023
-margin_top = 387.38
-margin_right = 51.1023
-margin_bottom = 387.38
-
-[node name="UI_Player_Ammo" parent="." instance=ExtResource( 18 )]
-margin_left = 8.0
-margin_top = 195.0
-margin_right = 15.0
-margin_bottom = 195.0
+[node name="UI_Player_Ammo" parent="." instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 128.0
+margin_right = 0.0
+margin_bottom = 128.0
 
 [node name="PlayerBody" parent="." instance=ExtResource( 10 )]
-position = Vector2( 803.544, 150 )
-collision_layer = 3
-collision_mask = 3
+position = Vector2( 803.01, 150 )
 
-[connection signal="spawn_enemy" from="." to="EnemySpawner" method="_on_Main_spawn_enemy"]
-[connection signal="spawn_obstacle" from="." to="ObstacleSpawner" method="_on_Main_spawn_obstacle"]
 [connection signal="spawn_pickup" from="." to="PickupSpawner" method="_on_Main_spawn_pickup"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="SpikeTimer" to="." method="_on_SpikeTimer_timeout"]
+[connection signal="pressed" from="Button" to="Background" method="_on_SpeedUp"]
+[connection signal="pressed" from="Button" to="Walls" method="_on_SpeedUp"]
+[connection signal="pressed" from="Button" to="." method="_on_SpeedUp"]
 [connection signal="ammo_change" from="PlayerBody" to="UI_Player_Ammo" method="_on_PlayerBody_ammo_change"]
-[connection signal="game_over" from="PlayerBody" to="UI_Player_Score" method="_on_PlayerBody_game_over"]
+[connection signal="game_over" from="PlayerBody" to="UI_Player_Score" method="game_over"]
 [connection signal="make_immortal" from="PlayerBody" to="UI_Player_HP" method="_on_PlayerBody_make_immortal"]
 [connection signal="on_health_changed" from="PlayerBody" to="UI_Player_HP" method="_on_PlayerBody_on_health_changed"]
+
+[editable path="PlayerBody"]
