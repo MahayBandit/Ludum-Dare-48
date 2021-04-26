@@ -82,3 +82,102 @@ position = Vector2( 803.01, 150 )
 [connection signal="pressed" from="Button" to="Walls" method="_on_SpeedUp"]
 
 [editable path="PlayerBody"]
+=======
+[gd_scene load_steps=13 format=2]
+=======
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/Background.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Scroll loop.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Wall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Spikes.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=5]
+[ext_resource path="res://scripts/PickupSpawner.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Pickups/Pickup A.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Pickups/Pickup B.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Pickups/Pickup C.tscn" type="PackedScene" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 800, 900 )
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 480, 1800, 0, 0, 0, 0, 1120, 1800 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1200, 1600, 0, 0, 0, 0, 1200, 1600, 0, 0, 0, 0, 400, 1600 )
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 5 )
+spike_scene = ExtResource( 4 )
+
+[node name="Background" type="StaticBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background"]
+position = Vector2( 800, 900 )
+shape = SubResource( 1 )
+
+[node name="Background" type="Sprite" parent="Background"]
+scale = Vector2( 10, 10 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Walls" parent="." instance=ExtResource( 3 )]
+
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="SpawnPathLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2( 480, 1800 )
+
+[node name="SpikePath" type="Path2D" parent="."]
+curve = SubResource( 3 )
+
+[node name="SpikePathLocation" type="PathFollow2D" parent="SpikePath"]
+position = Vector2( 1200, 1600 )
+rotation = 3.14159
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="SpikeTimer" type="Timer" parent="."]
+wait_time = 0.75
+autostart = true
+
+[node name="Button" type="Button" parent="."]
+margin_left = 44.6064
+margin_top = 48.3032
+margin_right = 341.606
+margin_bottom = 153.303
+text = "Speed up"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PickupSpawner" type="Node" parent="."]
+script = ExtResource( 6 )
+PickupA = ExtResource( 7 )
+PickupB = ExtResource( 8 )
+PickupC = ExtResource( 9 )
+
+[connection signal="spawn_pickup" from="." to="PickupSpawner" method="_on_Main_spawn_pickup"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="SpikeTimer" to="." method="_on_SpikeTimer_timeout"]
+[connection signal="pressed" from="Button" to="." method="_on_SpeedUp"]
+[connection signal="pressed" from="Button" to="Walls" method="_on_SpeedUp"]
+[connection signal="pressed" from="Button" to="Background" method="_on_SpeedUp"]
+=======
+
+[node name="Main" type="Node2D"]
+
+[node name="Background2" type="Sprite" parent="."]
+scale = Vector2( 10, 10 )
+texture = ExtResource( 1 )
+centered = false
+script = ExtResource( 2 )
+
+[node name="StaticBody2D" parent="." instance=ExtResource( 3 )]
