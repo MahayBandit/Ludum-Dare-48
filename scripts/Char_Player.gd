@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 signal on_health_changed(ammount)
-
-
+signal game_over()
+signal make_immortal()
 
 export var speed:= 0
 #export var falling_modifier = 1.0
@@ -21,7 +21,7 @@ func _ready():
 	print("poczatkowe hp: ", health)
 	print("3... 2... 1...")
 	print("FALL!")
-
+	emit_signal("on_health_changed", health)
 
 func _physics_process(delta: float) -> void:
 	
@@ -32,8 +32,7 @@ func _physics_process(delta: float) -> void:
 	var horizontl:= Vector2(Input.get_action_strength("Player_move_right") 
 	- Input.get_action_strength("Player_move_left"), 1.0)
 	
-	var verticl := Vector2(1.0 , Input.get_action_strength("Player_move_down") 
-	- Input.get_action_strength("Player_move_up"))
+	var verticl := Vector2(1.0 , 1.0)
 	
 	
 	
@@ -64,21 +63,22 @@ func take_dmg(ammount):
 func immortality(duration=3):
 	immortal = true
 	print ("immortality")
+	emit_signal("make_immortal")
 	
-	var timer = get_node("ImmortalityTimer")
+	var Imm_timer = get_node("ImmortalityTimer")
 	
-	timer.set_wait_time(duration)
-	
-	
-	timer.connect("timeout", self, "on_timer_timeout")
-	timer.set_one_shot(true)
-	timer.start()
+	Imm_timer.set_wait_time(duration)
 	
 	
-func on_timer_timeout():
+	Imm_timer.connect("timeout", self, "on_immortality_timer_timeout")
+	Imm_timer.set_one_shot(true)
+	Imm_timer.start()
+	
+func on_immortality_timer_timeout():
 	immortal = false
+	emit_signal("make_immortal")
 	
-	
+
 	
 func health_change(ammount):
 	
@@ -92,5 +92,7 @@ func health_change(ammount):
 		emit_signal("on_health_changed", health)
 		
 		
-		#if health <= 0:
+		if health <= 0:
 			#visible = false
+			emit_signal("game_over")
+
