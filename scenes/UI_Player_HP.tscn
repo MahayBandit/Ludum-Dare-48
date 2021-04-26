@@ -15,14 +15,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="."]
-margin_right = 384.0
-margin_bottom = 128.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Hearts_blc" type="TextureRect" parent="Panel"]
+[node name="Hearts_blc" type="TextureRect" parent="."]
 margin_right = 384.0
 margin_bottom = 128.0
 texture = ExtResource( 2 )
@@ -31,7 +24,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Heart_col" type="TextureRect" parent="Panel"]
+[node name="Heart_col" type="TextureRect" parent="."]
 margin_right = 384.0
 margin_bottom = 128.0
 texture = ExtResource( 3 )
@@ -40,7 +33,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hearts_blue" type="TextureRect" parent="Panel"]
+[node name="Hearts_blue" type="TextureRect" parent="."]
 margin_right = 384.0
 margin_bottom = 128.0
 texture = ExtResource( 4 )

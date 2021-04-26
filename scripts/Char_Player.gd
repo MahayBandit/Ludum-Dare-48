@@ -1,8 +1,23 @@
 extends KinematicBody2D
 
 signal on_health_changed(ammount)
+
+
 signal game_over()
 signal make_immortal()
+
+signal ammo_change(ammount)
+
+
+
+
+#-- to do usunuięcia i podmiany na ammo po merge 
+export var maao = 6
+
+
+#--------------------------
+
+
 
 export var speed:= 0
 #export var falling_modifier = 1.0
@@ -22,6 +37,11 @@ func _ready():
 	print("3... 2... 1...")
 	print("FALL!")
 	emit_signal("on_health_changed", health)
+	
+	
+	#--- zmienić na 
+	emit_signal("ammo_change",maao)
+	
 
 func _physics_process(delta: float) -> void:
 	
@@ -56,6 +76,11 @@ func take_dmg(ammount):
 	
 	
 	if not immortal:
+		
+		maao -= ammount
+		 
+		emit_signal("ammo_change", maao)
+		
 		health_change(ammount)
 		immortality()
 
@@ -95,4 +120,5 @@ func health_change(ammount):
 		if health <= 0:
 			#visible = false
 			emit_signal("game_over")
+			
 

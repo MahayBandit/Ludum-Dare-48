@@ -1,9 +1,8 @@
 extends Control
 
-onready var label = $Panel/Label
+onready var Hearts_col  = $Heart_col
+onready var Hearts_blue = $Hearts_blue
 
-onready var Hearts_col  = $Panel/Heart_col
-onready var Hearts_blue = $Panel/Hearts_blue
 
 func _ready():
 	Hearts_col.rect_size.x = 384.0
@@ -11,7 +10,6 @@ func _ready():
 	Hearts_blue.visible = not visible
 
 func _on_PlayerBody_on_health_changed(ammount):
-	print("dupa")
 	Hearts_col.rect_size.x = ammount * 128.0 
 	Hearts_blue.rect_size.x = ammount * 128.0
 	
