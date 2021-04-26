@@ -16,6 +16,9 @@ func _ready():
 	#Connect SpeedUp
 	var button = get_node("/root/Main/Button")
 	button.connect("pressed", self, "_on_SpeedUp")
+	#----zakomentowałem button.connect do testowanie ~Luna
+	
+	
 	
 	#Check if speed up is on
 #	var main = get_node("/root/Main")
@@ -35,3 +38,9 @@ func _on_timer_timeout():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+
+func take_dmg(ammount):
+	pass
+
+func _on_Area2D_body_entered(body):
+	body.take_dmg(-1)

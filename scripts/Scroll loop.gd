@@ -34,4 +34,5 @@ func _on_SpeedUp():
 func _on_timer_timeout():
 	velocity = default_velocity
 
-
+func take_dmg(ammount):
+	print("")
