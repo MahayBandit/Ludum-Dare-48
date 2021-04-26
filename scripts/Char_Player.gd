@@ -1,11 +1,14 @@
 extends KinematicBody2D
 
+signal on_health_changed(ammount)
+
 
 
 export var speed:= 0
-export var falling_modifier = 1.0
+#export var falling_modifier = 1.0
 
 export var max_health = 0
+
 var health = 0
 
 
@@ -34,10 +37,10 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-	if Input.get_action_strength("Player_move_faster"):
-		falling_modifier = 2.0
-	else:
-		falling_modifier = 0.5
+	#if Input.get_action_strength("Player_move_faster"):
+		#falling_modifier = 2.0
+	#else:
+		#falling_modifier = 0.5
 	
 	movement = movement * horizontl
 	#movement = movement * verticl * falling_modifier 
@@ -85,6 +88,9 @@ func health_change(ammount):
 			health = max_health
 		
 		print("Health changed: ", health)
+		
+		emit_signal("on_health_changed", health)
+		
 		
 		#if health <= 0:
 			#visible = false

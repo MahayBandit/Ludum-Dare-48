@@ -57,10 +57,10 @@ wait_time = 0.75
 autostart = true
 
 [node name="Button" type="Button" parent="."]
-margin_left = 44.6064
-margin_top = 48.3032
-margin_right = 341.606
-margin_bottom = 153.303
+margin_left = 55.5049
+margin_top = 59.0021
+margin_right = 352.504
+margin_bottom = 164.002
 text = "Speed up"
 __meta__ = {
 "_edit_use_anchors_": false

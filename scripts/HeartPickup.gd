@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 func health_change(ammount):
-	print("")
+	pass
 
 func _on_PlayerDetector_body_entered(body):
 	body.health_change(1)
