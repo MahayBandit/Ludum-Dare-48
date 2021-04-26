@@ -1,10 +1,11 @@
 extends Node2D
 
-#signal speed_up_on(time_left)
 signal spawn_pickup(spawn_location)
 signal spawn_obstacle(spawn_location)
+signal spawn_enemy(spawn_location)
 
 export (PackedScene) var spike_scene
+
 var rng = RandomNumberGenerator.new()
 export var speed_duration = 5
 var timer
@@ -35,13 +36,10 @@ func _on_SpawnTimer_timeout():
 	var spawn_roll = rng.randi_range(1, 100)
 	
 	#Choose category of what to spawn
-	if spawn_roll <= 50:
+	if spawn_roll <= 60:
 		emit_signal("spawn_obstacle", spawn_location)
-#	elif spawn_roll <= 80:
-#		pass
-#		_spawn_enemy()
+	elif spawn_roll <= 80:
+		emit_signal("spawn_enemy", spawn_location)
 	else:
 		emit_signal("spawn_pickup", spawn_location)
 	
-func health_change(_dupa):
-	pass

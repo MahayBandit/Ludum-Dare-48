@@ -10,12 +10,14 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -32, -32 )
+scale = Vector2( 3, 3 )
 shape = SubResource( 1 )
 
 [node name="Spikes" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 centered = false
-offset = Vector2( -64, -64 )
+offset = Vector2( -32, -32 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -64, -64 )

@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export var velocity = 500
 var is_rocket = true
+var is_wall = false
 
 func _process(delta):
 	position.y += velocity * delta

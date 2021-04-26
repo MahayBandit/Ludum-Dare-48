@@ -5,7 +5,7 @@ export (PackedScene) var rocket_scene
 export var speed = 500
 export var max_health = 5
 var health
-var ammo = 0
+var ammo = 3
 var points = 0
 var immortal = false
 var rocket_flag = true
@@ -13,6 +13,7 @@ var imortality_timer
 var rocket_timer
 
 var is_rocket = false
+var is_wall = false
 
 func _ready():
 	imortality_timer = get_node("ImmortalityTimer")
@@ -74,13 +75,15 @@ func ammo_change(amount):
 	print("Ammo: ", ammo)
 
 func shoot_rocket():
-	rocket_timer.start()
-	rocket_timer.set_wait_time(1)
-	var rocket = rocket_scene.instance()
-	get_node("/root/Main").add_child(rocket)
-	rocket.position = position + Vector2(0, 150)
-		
-	rocket_flag = false
+	if ammo != 0:
+		rocket_timer.start()
+		rocket_timer.set_wait_time(1)
+		var rocket = rocket_scene.instance()
+		get_node("/root/Main").add_child(rocket)
+		rocket.position = position + Vector2(0, 150)
+	
+		ammo -= 1
+		rocket_flag = false
 
 func on_rocket_timer_timeout():
 	rocket_flag = true

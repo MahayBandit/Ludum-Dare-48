@@ -16,7 +16,7 @@ func _on_BricksObstacle_body_entered(body):
 		body.take_dmg(1)
 		queue_free()
 
-func _on_PlanksObstacle_body_shape_entered(body_id, body, body_shape, local_shape):
+func _on_PlanksObstacle_body_entered(body):
 	if body.is_rocket:
 		body.destroy()
 		queue_free()
