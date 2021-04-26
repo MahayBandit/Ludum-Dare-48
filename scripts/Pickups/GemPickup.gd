@@ -12,5 +12,5 @@ func _on_GemPickup_body_entered(body):
 	if body.is_rocket:
 		pass
 	else:
-		body.points_change(100)
+		body.points_change(10)
 		queue_free()

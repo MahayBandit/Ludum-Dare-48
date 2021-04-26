@@ -24,3 +24,7 @@ func game_over():
 
 func _on_PlayerBody_game_over():
 	game_over()
+
+func _on_PlayerBody_add_points(amount):
+	score_count += amount
+	score_label.text = "Score: " + str(score_count)

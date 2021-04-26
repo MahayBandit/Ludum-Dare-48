@@ -6,12 +6,12 @@ export var speed = 500
 export var max_health = 3
 var health = 0
 var ammo = 3
-var points = 0
 
 signal on_health_changed(amount)
 signal game_over()
 signal make_immortal()
 signal ammo_change(amount)
+signal add_points(amount)
 
 var immortal = false
 var rocket_flag = true
@@ -44,8 +44,8 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		if rocket_flag:
 			shoot_rocket()
-	if Input.is_action_pressed("ui_cancel"):
-		game_over()
+	#if Input.is_action_pressed("ui_cancel"):
+	#	menu_game_over()
 	
 	move_and_slide(movement * speed)
 
@@ -81,7 +81,7 @@ func health_change(amount):
 	emit_signal("on_health_changed", health)
 		
 	if health <= 0:
-		emit_signal("game_over")
+		menu_game_over()
 
 #Ammo managment
 func ammo_change(amount):
@@ -105,8 +105,7 @@ func on_rocket_timer_timeout():
 
 #Points managmet
 func points_change(amount):
-	points += amount
-	print("Oto twoje punkty byku: ", points)
+	emit_signal("add_points", amount)
 
 func menu_game_over():
 	get_tree().change_scene("res://scenes/GameOver.tscn")

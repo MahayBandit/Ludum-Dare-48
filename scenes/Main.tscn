@@ -113,6 +113,7 @@ collision_mask = 3
 [connection signal="spawn_pickup" from="." to="PickupSpawner" method="_on_Main_spawn_pickup"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="SpikeTimer" to="." method="_on_SpikeTimer_timeout"]
+[connection signal="add_points" from="PlayerBody" to="UI_Player_Score" method="_on_PlayerBody_add_points"]
 [connection signal="ammo_change" from="PlayerBody" to="UI_Player_Ammo" method="_on_PlayerBody_ammo_change"]
 [connection signal="game_over" from="PlayerBody" to="UI_Player_Score" method="_on_PlayerBody_game_over"]
 [connection signal="make_immortal" from="PlayerBody" to="UI_Player_HP" method="_on_PlayerBody_make_immortal"]
