@@ -47,9 +47,10 @@ __meta__ = {
 }
 
 [node name="Left" type="VBoxContainer" parent="Outer Margin/HBoxContainer"]
-margin_left = 448.0
-margin_right = 512.0
+margin_left = 183.0
+margin_right = 247.0
 margin_bottom = 700.0
+size_flags_horizontal = 6
 alignment = 1
 
 [node name="MSprite_1" type="TextureRect" parent="Outer Margin/HBoxContainer/Left"]
@@ -59,13 +60,18 @@ margin_bottom = 382.0
 texture = ExtResource( 2 )
 
 [node name="Center" type="VBoxContainer" parent="Outer Margin/HBoxContainer"]
-margin_left = 516.0
-margin_right = 784.0
+margin_left = 434.0
+margin_right = 865.0
 margin_bottom = 700.0
+size_flags_horizontal = 3
+alignment = 1
 
 [node name="Title" type="VBoxContainer" parent="Outer Margin/HBoxContainer/Center"]
-margin_right = 268.0
+margin_left = 81.0
+margin_right = 349.0
 margin_bottom = 64.0
+size_flags_horizontal = 4
+alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Outer Margin/HBoxContainer/Center/Title"]
 margin_right = 268.0
@@ -96,13 +102,13 @@ texture = ExtResource( 9 )
 
 [node name="Controls" type="VBoxContainer" parent="Outer Margin/HBoxContainer/Center"]
 margin_top = 68.0
-margin_right = 268.0
+margin_right = 431.0
 margin_bottom = 700.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Start" type="TextureButton" parent="Outer Margin/HBoxContainer/Center/Controls"]
-margin_right = 268.0
+margin_right = 431.0
 margin_bottom = 208.0
 size_flags_vertical = 3
 texture_normal = ExtResource( 13 )
@@ -112,7 +118,7 @@ stretch_mode = 5
 
 [node name="Settings_B" type="TextureButton" parent="Outer Margin/HBoxContainer/Center/Controls"]
 margin_top = 212.0
-margin_right = 268.0
+margin_right = 431.0
 margin_bottom = 420.0
 size_flags_vertical = 3
 texture_normal = ExtResource( 10 )
@@ -122,7 +128,7 @@ stretch_mode = 5
 
 [node name="Exit" type="TextureButton" parent="Outer Margin/HBoxContainer/Center/Controls"]
 margin_top = 424.0
-margin_right = 268.0
+margin_right = 431.0
 margin_bottom = 632.0
 size_flags_vertical = 3
 texture_normal = ExtResource( 12 )
@@ -131,15 +137,17 @@ expand = true
 stretch_mode = 5
 
 [node name="Right" type="VBoxContainer" parent="Outer Margin/HBoxContainer"]
-margin_left = 788.0
-margin_right = 852.0
+margin_left = 1052.0
+margin_right = 1116.0
 margin_bottom = 700.0
+size_flags_horizontal = 6
 alignment = 1
 
 [node name="MSprite_2" type="TextureRect" parent="Outer Margin/HBoxContainer/Right"]
 margin_top = 318.0
 margin_right = 64.0
 margin_bottom = 382.0
+size_flags_horizontal = 0
 texture = ExtResource( 3 )
 
 [connection signal="pressed" from="Outer Margin/HBoxContainer/Center/Controls/Start" to="." method="_on_Start_pressed"]
