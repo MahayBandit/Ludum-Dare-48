@@ -18,6 +18,10 @@ config/name="Ludum Dare 48"
 run/main_scene="res://scenes/Menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalVars="*res://scripts/global_vars.gd"
+
 [display]
 
 window/size/width=1600

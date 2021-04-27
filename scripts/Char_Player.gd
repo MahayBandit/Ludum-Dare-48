@@ -44,8 +44,8 @@ func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		if rocket_flag:
 			shoot_rocket()
-	#if Input.is_action_pressed("ui_cancel"):
-	#	menu_game_over()
+	if Input.is_action_pressed("ui_cancel"):
+		menu_game_over()
 	
 	move_and_slide(movement * speed)
 
@@ -79,7 +79,7 @@ func health_change(amount):
 	print("Health changed: ", health)
 		
 	emit_signal("on_health_changed", health)
-		
+	
 	if health <= 0:
 		menu_game_over()
 
@@ -108,4 +108,5 @@ func points_change(amount):
 	emit_signal("add_points", amount)
 
 func menu_game_over():
+	emit_signal("game_over")
 	get_tree().change_scene("res://scenes/GameOver.tscn")

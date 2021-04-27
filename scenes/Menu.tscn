@@ -1,14 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/placeholders/purpleblock.png" type="Texture" id=1]
-[ext_resource path="res://assets/placeholders/blueblock.png" type="Texture" id=2]
-[ext_resource path="res://assets/placeholders/greenblock.png" type="Texture" id=3]
-[ext_resource path="res://assets/placeholders/yellowblock.png" type="Texture" id=4]
-[ext_resource path="res://assets/placeholders/greyblock.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/Background.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/Letter_N.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Letter_R.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/Kotek.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/Background_menu.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/Buttons/Start_B.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/Buttons/Exit_B.png" type="Texture" id=8]
-[ext_resource path="res://assets/placeholders/redblock.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/Buttons/Settings_B_gray.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/Buttons/Settings_B.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/Buttons/Exit_B_gray.png" type="Texture" id=12]
@@ -47,17 +44,19 @@ __meta__ = {
 }
 
 [node name="Left" type="VBoxContainer" parent="Outer Margin/HBoxContainer"]
-margin_left = 183.0
-margin_right = 247.0
+margin_left = 215.0
+margin_right = 215.0
 margin_bottom = 700.0
 size_flags_horizontal = 6
 alignment = 1
 
 [node name="MSprite_1" type="TextureRect" parent="Outer Margin/HBoxContainer/Left"]
-margin_top = 318.0
-margin_right = 64.0
-margin_bottom = 382.0
-texture = ExtResource( 2 )
+visible = false
+margin_top = 350.0
+margin_bottom = 350.0
+size_flags_horizontal = 3
+texture = ExtResource( 3 )
+expand = true
 
 [node name="Center" type="VBoxContainer" parent="Outer Margin/HBoxContainer"]
 margin_left = 434.0
@@ -86,19 +85,19 @@ texture = ExtResource( 1 )
 margin_left = 68.0
 margin_right = 132.0
 margin_bottom = 64.0
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="Outer Margin/HBoxContainer/Center/Title/HBoxContainer"]
 margin_left = 136.0
 margin_right = 200.0
 margin_bottom = 64.0
-texture = ExtResource( 5 )
+texture = ExtResource( 2 )
 
 [node name="TextureRect2" type="TextureRect" parent="Outer Margin/HBoxContainer/Center/Title/HBoxContainer"]
 margin_left = 204.0
 margin_right = 268.0
 margin_bottom = 64.0
-texture = ExtResource( 9 )
+texture = ExtResource( 2 )
 
 [node name="Controls" type="VBoxContainer" parent="Outer Margin/HBoxContainer/Center"]
 margin_top = 68.0
@@ -109,7 +108,7 @@ alignment = 1
 
 [node name="Start" type="TextureButton" parent="Outer Margin/HBoxContainer/Center/Controls"]
 margin_right = 431.0
-margin_bottom = 208.0
+margin_bottom = 314.0
 size_flags_vertical = 3
 texture_normal = ExtResource( 13 )
 texture_hover = ExtResource( 7 )
@@ -117,6 +116,7 @@ expand = true
 stretch_mode = 5
 
 [node name="Settings_B" type="TextureButton" parent="Outer Margin/HBoxContainer/Center/Controls"]
+visible = false
 margin_top = 212.0
 margin_right = 431.0
 margin_bottom = 420.0
@@ -127,7 +127,7 @@ expand = true
 stretch_mode = 5
 
 [node name="Exit" type="TextureButton" parent="Outer Margin/HBoxContainer/Center/Controls"]
-margin_top = 424.0
+margin_top = 318.0
 margin_right = 431.0
 margin_bottom = 632.0
 size_flags_vertical = 3
@@ -137,18 +137,17 @@ expand = true
 stretch_mode = 5
 
 [node name="Right" type="VBoxContainer" parent="Outer Margin/HBoxContainer"]
-margin_left = 1052.0
-margin_right = 1116.0
+margin_left = 1084.0
+margin_right = 1084.0
 margin_bottom = 700.0
 size_flags_horizontal = 6
 alignment = 1
 
 [node name="MSprite_2" type="TextureRect" parent="Outer Margin/HBoxContainer/Right"]
-margin_top = 318.0
-margin_right = 64.0
-margin_bottom = 382.0
+visible = false
+margin_top = 350.0
+margin_bottom = 350.0
 size_flags_horizontal = 0
-texture = ExtResource( 3 )
 
 [connection signal="pressed" from="Outer Margin/HBoxContainer/Center/Controls/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Outer Margin/HBoxContainer/Center/Controls/Settings_B" to="." method="_on_Settings_B_pressed"]
